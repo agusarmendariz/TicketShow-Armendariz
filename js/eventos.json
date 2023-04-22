@@ -1,0 +1,47 @@
+[
+    {
+        "id":1,
+        "nombre":"BILLIE EILISH  (20/06)",
+        "precio":18000,
+        "lugar":"Estadio Monumental River Plate",
+        "img":"./assets/img/billie.webp"
+},
+{   
+    "id":2,
+    "nombre":"THE WEEKND (5/07)",
+    "precio":15000,
+    "lugar":"Estadio Velez Sarsfield",
+    "img":"./assets/img/the weeknd.jpg"
+},
+
+{   
+    "id":3,
+    "nombre":"DUA LIPA (16/08)",
+    "precio":15000,
+    "lugar":"Hipodromo de Palermo",
+    "img":"./assets/img/dualipa.jpg"
+},
+{
+    "id":4,
+    "nombre":"COLDPLAY (7/09)",
+    "precio":20000,
+    "lugar":"Estadio Monumental River Plate",
+    "img":"./assets/img/coldplay.webp"
+},
+{
+    "id":5,
+    "nombre":"RED HOT CHILI PEPPERS (10/10)",
+    "precio":30000,
+    "lugar":"Estadio Monumental River Plate",
+    "img":"./assets/img/rdcp.jpg"
+},
+{
+    "id":6,
+    "nombre":"MILEY CYRUS (21/11)",
+    "precio":20000,
+    "lugar":"Estadio de la PLata",
+    "img":"./assets/img/myley.jpg"
+}
+
+
+]
