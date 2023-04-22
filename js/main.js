@@ -4,6 +4,7 @@ const mainFuntion= async ()=>{
   const main = document.getElementById("mainBox");
   const vaciarCarrito = document.querySelector("#vaciarCarrito");
   const procesarCompra = document.querySelector("#continuarCompra");
+ 
   
   const datos = await fetchDataFromJson();
   eventos =[...datos]
@@ -11,7 +12,7 @@ const mainFuntion= async ()=>{
   addFuntions(vaciarCarrito,procesarCompra, precioTotal);
   totalPagarCarrito();
   totalCompra();
-  enviarCompra();
+  formularioPago();
   }
   
   
@@ -48,7 +49,12 @@ const showEventos=(eventos,main)=>{
   const cargarEntradas =()=>{
     return JSON.parse(localStorage.getItem("carrito")) || [];
   }
-
+  const formularioPago=()=>{
+    const formulario = document.querySelector('#procesar-pago')
+    if(formulario){
+        formulario.addEventListener('submit', (e)=>enviarCompra(e));
+    }
+  }
   
   
   const addFuntions =(vaciarCarrito, procesarCompra, precioTotal)=>{
@@ -137,50 +143,40 @@ const botonCarrito=()=> {
   document.getElementById("numeroCarrito").innerText = totalEntradas();
 }
 
-const formularioPago=()=>{
-  console.log("entra?");
-  const formulario = document.querySelector('#procesar-pago')
-  if(formulario){
-      formulario.addEventListener('submit', enviarCompra)
-    
-  }
-}
 
 
-const enviarCompra=(e)=>{
 
+const enviarCompra= async(e)=>{
   e.preventDefault();
- 
+  
   const email = document.querySelector('#correo').value
   const cliente = document.querySelector('#cliente').value
+  const formulario = document.querySelector('#procesar-pago')
 
+  console.log("this",this);
   if(email === '' || cliente ===''){
     Swal.fire({
       title: "¡Debes completar tu email y nombre!",
       text: "Rellena el formulario",
       icon: "error",
       confirmButtonText: "Aceptar",
-  })
+    })
   } else {
-    
-
-  const btn = document.getElementById('button');
-  
-
-     btn.value = 'Enviando..';
-  
-     const serviceID =  'default_service';
+    const btn = document.getElementById('button');
+    btn.value = 'Enviando..';  
+     const serviceID =  'service_wi4fhea';
      const templateID = 'template_ksvks3i';
   
-    emailjs.sendForm(serviceID, templateID, this)
-      .then(() => {
-        btn.value = 'Finalizar compra';
-        alert('Enviado!');
-      }, (err) => {
-        btn.value = 'Finalizar compra';
-        alert(JSON.stringify(err));
-      });
- 
+  
+  try {
+    const res = await emailjs.sendForm(serviceID, templateID, this);
+    console.log(res);
+    btn.value = 'Finalizar compra';
+    alert('Enviado!');    
+  } catch (error) {
+    alert(JSON.stringify(error));
+    btn.value = 'Finalizar compra';
+  }
 
  const spinner = document.querySelector('#spinner')
  
@@ -207,6 +203,7 @@ const enviarCompra=(e)=>{
 }
 localStorage.clear();
 }
+
 
 
 
